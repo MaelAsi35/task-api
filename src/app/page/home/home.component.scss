@@ -1,0 +1,11 @@
+.flex-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+
+    .task-table {
+        padding: 2em;
+        width: 90%;
+    }
+}

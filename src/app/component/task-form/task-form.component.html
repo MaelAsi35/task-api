@@ -1,0 +1,23 @@
+<div class="flex-container">
+  <h1>{{ title }}</h1>
+  <form class="form-container" [formGroup]="taskForm" (ngSubmit)="onSubmit()">
+    <mat-form-field>
+      <mat-label>Label</mat-label>
+      <input matInput formControlName="label" class="label-input" />
+      <mat-error *ngIf="errorHandling('label', 'required')"
+        >this field is mandatory</mat-error
+      >
+    </mat-form-field>
+    <div class="label-input">
+      <mat-checkbox formControlName="complete">Complete</mat-checkbox>
+    </div>
+    <button
+      mat-raised-button
+      color="primary"
+      type="submit"
+      [disabled]="!taskForm.valid"
+    >
+      Submit
+    </button>
+  </form>
+</div>

@@ -1,0 +1,7 @@
+<div class="flex-container">
+  <h1>Tasks API</h1>
+  <button mat-raised-button color="primary" (click)="goToTaskCreationPage()">
+    Create a task
+  </button>
+  <app-task-table [tasksList]="tasksList" class="task-table"></app-task-table>
+</div>
