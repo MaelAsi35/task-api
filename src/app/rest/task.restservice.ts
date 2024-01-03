@@ -9,6 +9,7 @@ export class TaskWebServiceClient {
   constructor(protected httpClient: HttpClient) {}
 
   search(searchTaskDto: TaskSearchDto): Observable<PagedResponse<TaskDto>> {
+    // TODO: clean this
     let httpParams: HttpParams = new HttpParams()
       .set('page', searchTaskDto.page!)
       .set('size', searchTaskDto.pageSize!);

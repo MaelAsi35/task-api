@@ -15,7 +15,7 @@ export class CreateTaskComponent {
 
   constructor(private activatedRoute: ActivatedRoute) {}
 
-  ngOnInit() {
+  public ngOnInit() {
     this.activatedRoute.data.subscribe(({ task }) => {
       this.task = task;
     });

@@ -17,7 +17,7 @@ export class HomeComponent {
 
   constructor(private activatedRoute: ActivatedRoute, private router: Router) {}
 
-  ngOnInit() {
+  public ngOnInit() {
     this.activatedRoute.data.subscribe(({ tasks }) => {
       this.tasksList = tasks;
     });

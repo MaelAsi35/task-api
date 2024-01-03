@@ -13,6 +13,11 @@ import {
 export class TaskService {
   constructor(private taskWebServiceClient: TaskWebServiceClient) {}
 
+  /**
+   * Create a task
+   * @param taskFormDto creation information
+   * @returns created task
+   */
   createTask(taskFormDto: TaskFormDto): Promise<TaskDto> {
     return new Promise<TaskDto>((resolve) => {
       this.taskWebServiceClient.create(taskFormDto).subscribe((response) => {
@@ -21,6 +26,12 @@ export class TaskService {
     });
   }
 
+  /**
+   * Update a task with it's id
+   * @param id task's id
+   * @param taskFormDto update infos
+   * @returns updated task
+   */
   updateTask(id: number, taskFormDto: TaskFormDto): Promise<TaskDto> {
     return new Promise<TaskDto>((resolve) => {
       this.taskWebServiceClient
@@ -31,6 +42,11 @@ export class TaskService {
     });
   }
 
+  /**
+   * Search a task
+   * @param taskSearchDto search criterias
+   * @returns search results (paginated)
+   */
   search(taskSearchDto: TaskSearchDto): Promise<PagedResponse<TaskDto>> {
     return new Promise<PagedResponse<TaskDto>>((resolve) => {
       this.taskWebServiceClient.search(taskSearchDto).subscribe((response) => {
@@ -39,6 +55,11 @@ export class TaskService {
     });
   }
 
+  /**
+   * Get a task by its id
+   * @param id task's id
+   * @returns the task
+   */
   getById(id: number): Promise<TaskDto> {
     return new Promise<TaskDto>((resolve) => {
       this.taskWebServiceClient.getById(id).subscribe((response) => {

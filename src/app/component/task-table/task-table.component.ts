@@ -52,7 +52,7 @@ export class TaskTableComponent implements AfterViewInit, OnInit {
   protected displayedColumns: string[] = ['label', 'complete'];
 
   // Private attributes
-  private isFilteredOnComplete = false;
+  private isFilteredOnComplete = true;
 
   constructor(private router: Router, private taskService: TaskService) {}
 
@@ -67,21 +67,37 @@ export class TaskTableComponent implements AfterViewInit, OnInit {
     this.dataSource.paginator = this.paginator;
   }
 
+  /**
+   * Go to the selected task
+   * @param id task's id
+   */
   protected goToTask(id: string) {
     this.router.navigate(['/task/' + id]);
   }
 
+  /**
+   * Get tasks from pagination event
+   * @param e page event
+   */
   protected async handlePageEvent(e: PageEvent) {
     this.searchDto.pageSize = e.pageSize;
     this.searchDto.page = e.pageIndex;
-    const res = await this.taskService.search(this.searchDto);
-    this.dataSource.data = res.content;
-    this.paginator.length = res.totalElements;
+    await this.getPaginatedtasks();
   }
 
+  /**
+   * Get tasks to complete
+   */
   protected async searchTasks() {
     this.isFilteredOnComplete = !this.isFilteredOnComplete;
     this.searchDto.complete = this.isFilteredOnComplete;
+    await this.getPaginatedtasks();
+  }
+
+  /**
+   * Get the tasks with current filters and pagination
+   */
+  private async getPaginatedtasks() {
     const tableResult = await this.taskService.search(this.searchDto);
     this.dataSource.data = tableResult.content;
     this.paginator.length = tableResult.totalElements;

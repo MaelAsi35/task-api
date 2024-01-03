@@ -46,7 +46,7 @@ export class TaskFormComponent implements OnInit {
     private _snackBar: MatSnackBar
   ) {}
 
-  ngOnInit(): void {
+  public ngOnInit(): void {
     if (this.task) {
       this.title = 'Update a task';
 
@@ -59,7 +59,10 @@ export class TaskFormComponent implements OnInit {
     }
   }
 
-  async onSubmit() {
+  /**
+   * Create or update a task
+   */
+  protected async onSubmit() {
     const taskFormDto: TaskFormDto = {
       label: this.taskForm.get('label')!.value ?? '',
       complete: this.taskForm.get('complete')!.value ?? false,
@@ -79,7 +82,13 @@ export class TaskFormComponent implements OnInit {
     }
   }
 
-  errorHandling(controlName: string, validatorType: string): boolean {
+  /**
+   * Detect if the current control is valid or not
+   * @param controlName name of the control
+   * @param validatorType validator
+   * @returns true if not valid, false otherwise
+   */
+  protected errorHandling(controlName: string, validatorType: string): boolean {
     return this.taskForm.get(controlName)?.hasError(validatorType) ?? false;
   }
 }
